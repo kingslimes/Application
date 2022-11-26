@@ -1,0 +1,28 @@
+{
+  "name": "application",
+  "version": "1.1.0",
+  "description": "Application manga reader",
+  "main": "application.js",
+  "scripts": {
+    "test": "nodemon application.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kingslimes/Application.git"
+  },
+  "keywords": [
+    "manga"
+  ],
+  "author": "kingslimes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kingslimes/Application/issues"
+  },
+  "homepage": "https://github.com/kingslimes/Application#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3"
+  }
+}
