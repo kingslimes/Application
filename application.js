@@ -12,9 +12,14 @@ const member = new slimeDB('member').createTable({
   created: slimeDB.DataType.DATETIME
 });
 
+// set home page
+client.get('/', ( req, res ) => {
+  res.render('index');
+})
 
 // set register page
 client.get('/register', ( req, res ) => {
+  if ( req.session.login ) return res.redirect( req.session.dashboard );
   req.session.status = 'register';
   res.render('register');
 })
@@ -60,6 +65,7 @@ client.post('/register', ( req, res ) => {
 
 // set login page
 client.get('/login', ( req, res ) => {
+  if ( req.session.login ) return res.redirect( req.session.dashboard );
   req.session.status = 'login';
   res.render('login');
 })

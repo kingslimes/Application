@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register</title>
+  <link rel="shortcut icon" href="<%= locals.favicon %>" type="image/x-icon">
+  <link rel="manifest" href="<%= locals.manifest %>">
+  <link rel="stylesheet" href="data:text/css;base64,QGltcG9ydCB1cmwoaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3MyP2ZhbWlseT1Qb3BwaW5zOndnaHRAMjAwOzMwMDs0MDAmZGlzcGxheT1zd2FwKTtib2R5LGZvcm17aGVpZ2h0OjEwMCV9LmNpcmNsZSxib2R5e2Rpc3BsYXk6ZmxleH0uZmlsZCwud3JhcHBlcntwb3NpdGlvbjpyZWxhdGl2ZX1pbnB1dDotd2Via2l0LWF1dG9maWxsey13ZWJraXQtYmFja2dyb3VuZC1jbGlwOnRleHQ7YmFja2dyb3VuZC1jbGlwOnRleHR9Ym9keSAqe2ZvbnQtZmFtaWx5OlBvcHBpbnMsc2Fucy1zZXJpZjt1c2VyLXNlbGVjdDpub25lOy1tcy11c2VyLXNlbGVjdDpub25lOy13ZWJraXQtdXNlci1zZWxlY3Q6bm9uZX1ib2R5e3RvcDowO2xlZnQ6MDttYXJnaW46MDt3aWR0aDoxMDAlO3Bvc2l0aW9uOmFic29sdXRlO2JhY2tncm91bmQ6I2VlZTthbGlnbi1pdGVtczpjZW50ZXI7anVzdGlmeS1jb250ZW50OmNlbnRlcn0ud3JhcHBlcntib3gtc2hhZG93OnJnYmEoNzAsNzAsMTEzLC4xKSAwIDEzcHggMjdweCAtNXB4LHJnYmEoMCwwLDAsLjEpIDAgOHB4IDE2cHggLThweDtiYWNrZ3JvdW5kOiNmZmY7Ym94LXNpemluZzpib3JkZXItYm94O2JvcmRlci1yYWRpdXM6N3B4O3dpZHRoOmNhbGMoMTAwdncgLSA0MHB4KTttYXgtd2lkdGg6MzIwcHg7cGFkZGluZzozcmVtIDEuMnJlbX0uY2lyY2xlLGJ1dHRvbntiYWNrZ3JvdW5kOiMxZTkwZmZ9LmNvbnRlbnQtaGVhZCxmb3Jte3dpZHRoOjEwMCV9LmNpcmNsZXtqdXN0aWZ5LWNvbnRlbnQ6Y2VudGVyO2FsaWduLWl0ZW1zOmNlbnRlcjtib3JkZXItcmFkaXVzOjUwJTttYXJnaW46MCBhdXRvO2hlaWdodDo4MHB4O3dpZHRoOjgwcHh9LmNpcmNsZSBzdmd7ZmlsbDp3aGl0ZTt3aWR0aDo0MHB4O2hlaWdodDo0MHB4fS5maWxkIGlucHV0LGJ1dHRvbntib3gtc2l6aW5nOmJvcmRlci1ib3g7d2lkdGg6MTAwJX0udGl0bGV7dGV4dC1hbGlnbjpjZW50ZXI7Zm9udC1zaXplOjEuNnJlbTtmb250LXdlaWdodDo1MDA7cGFkZGluZzouMnJlbSAwIC42cmVtfS5maWxke21hcmdpbi10b3A6MXJlbX0uZXllLC5maWxkIGxhYmVse2JhY2tncm91bmQ6I2ZmZjtwb3NpdGlvbjphYnNvbHV0ZTtjdXJzb3I6dGV4dH0uZmlsZCBpbnB1dHtib3JkZXI6MXB4IHNvbGlkICM2NjY2NjYzMztwYWRkaW5nOjZweCAxcmVtO2ZvbnQtc2l6ZToxcmVtO2hlaWdodDo0NnB4O2JvcmRlci1yYWRpdXM6NXB4O291dGxpbmU6MDt0cmFuc2l0aW9uOmJvcmRlciAuM3N9LmZpbGQgaW5wdXQ6bm90KFt2YWx1ZT0iIl0pfmxhYmVse3RvcDpjYWxjKC0yNXB4IC8gMik7Zm9udC1zaXplOjEwcHQ7Y29sb3I6IzAwMDAwMDk5O2N1cnNvcjpkZWZhdWx0fS5maWxkIGxhYmVse3RvcDpjYWxjKDQ2cHggLyA0KTtmb250LXNpemU6MXJlbTtwYWRkaW5nOjAgNHB4O2xlZnQ6LjdyZW07dHJhbnNpdGlvbjp0b3AgLjNzfS5maWxkIGlucHV0LnJlZHtib3JkZXI6MnB4IHNvbGlkIHJlZH0uZmlsZCBpbnB1dC5yZWR+bGFiZWx7Y29sb3I6cmVkfS5maWxkIGlucHV0OmZvY3Vze2JvcmRlcjoycHggc29saWQgIzE5MDlmZn0uZmlsZCBpbnB1dDpmb2N1c35sYWJlbHt0b3A6Y2FsYygtMjVweCAvIDIpO2ZvbnQtc2l6ZToxMHB0O2NvbG9yOiMwNzA3ZmY7Y3Vyc29yOmRlZmF1bHR9YnV0dG9ue2JvcmRlci1yYWRpdXM6NXB4O2ZvbnQtc2l6ZToxM3B0O21hcmdpbi10b3A6NXB4O3BhZGRpbmc6LjRyZW07Ym9yZGVyOm5vbmU7Y29sb3I6I2ZmZjtjdXJzb3I6cG9pbnRlcn0uZm9yZ290e3RleHQtYWxpZ246cmlnaHQ7Zm9udC1zaXplOjEwcHQ7cGFkZGluZzo2cHh9LmZvcmdvdCBhLC5yZWRpcmVjdCBhe3RleHQtZGVjb3JhdGlvbjpub25lO2NvbG9yOiMwMDE5RkY5OX0ucmVkaXJlY3R7Zm9udC1zaXplOjEwcHQ7cGFkZGluZy10b3A6MXJlbTt0ZXh0LWFsaWduOmNlbnRlcn0uZXlle3RvcDpjYWxjKDYwcHggLyA0KTtwYWRkaW5nLWxlZnQ6NXB4O3JpZ2h0OjFyZW07Y3Vyc29yOnBvaW50ZXJ9LmV5ZSBzdmd7ZmlsbDojNjY2NjY2O3dpZHRoOjE4cHg7aGVpZ2h0OjE4cHh9aW5wdXQ6Oi1tcy1jbGVhcixpbnB1dDo6LW1zLXJldmVhbHtkaXNwbGF5Om5vbmV9">
+</head>
+<body>
+<section class="wrapper">
+  <form action="/register" method="POST">
+    <div class="content-head">
+      <div class="circle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 0c70.7 0 128 57.3 128 128s-57.3 128-128 128s-128-57.3-128-128S153.3 0 224 0zM209.1 359.2l-18.6-31c-6.4-10.7 1.3-24.2 13.7-24.2H224h19.7c12.4 0 20.1 13.6 13.7 24.2l-18.6 31 33.4 123.9 39.5-161.2c77.2 12 136.3 78.8 136.3 159.4c0 17-13.8 30.7-30.7 30.7H265.1 182.9 30.7C13.8 512 0 498.2 0 481.3c0-80.6 59.1-147.4 136.3-159.4l39.5 161.2 33.4-123.9z"/></svg>
+      </div>
+      <div class="title">
+        Register
+      </div>
+    </div>
+    <div class="content">
+      <div class="fild">
+        <input type="text" name="email" id="email" value="<%= flash.email %>" onkeyup="this.setAttribute('value', this.value);(/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.value)) ? this.classList.remove('red') : ( this.value.length > 0 ? this.classList.add('red') : this.classList.remove('red') );" required>
+        <label for="email">Email</label>
+      </div>
+      <div class="fild">
+        <input type="text" name="username" id="username" value="<%= flash.username %>" onkeyup="this.setAttribute('value', this.value);(/^(?=.*[a-z]).{9,29}$/.test(this.value)) ? this.classList.remove('red') : ( this.value.length > 0 ? this.classList.add('red') : this.classList.remove('red') );" required>
+        <label for="username">Username</label>
+      </div>
+      <div class="fild">
+        <input type="password" name="password" id="password" value="<%= flash.password %>" onkeyup="this.setAttribute('value', this.value);(/^(?=.*[a-z]).{8,29}$/.test(this.value)) ? this.classList.remove('red') : ( this.value.length > 0 ? this.classList.add('red') : this.classList.remove('red') );" required>
+        <label for="password">Password</label>
+        <div class="eye">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg>
+        </div>
+      </div>
+      <div class="fild">
+        <input type="password" id="c_password" value="<%= flash.password %>" onkeyup="this.setAttribute('value', this.value);(this.value==password.value) ? this.classList.remove('red') : this.classList.add('red');" required>
+        <label for="c_password">Confirm Password</label>
+        <div class="eye">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg>
+        </div>
+      </div>
+      <div class="forgot">
+        
+      </div>
+      <button type="submit">Register</button>
+    </div>
+    <div class="redirect">
+      Already have account? <a href="/login">Login</a>
+    </div>
+  </form>
+</section>
+<script>const setError=(name)=>document.getElementById(name).classList.add('red');<% if( flash.error ){ flash.error.forEach(name=> { %>setError("<%= name %>");<% })} %></script>
+<script src="data:text/javascript;base64,ZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgiLmV5ZSIpLmZvckVhY2goKGM9PntjLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwoZT0+e2xldCBzPWMucGFyZW50Tm9kZS5xdWVyeVNlbGVjdG9yKCJpbnB1dCIpOyJwYXNzd29yZCI9PXMudHlwZT8oYy5pbm5lckhUTUw9JzxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNjQwIDUxMiI+PHBhdGggZD0iTTM4LjggNS4xQzI4LjQtMy4xIDEzLjMtMS4yIDUuMSA5LjJTLTEuMiAzNC43IDkuMiA0Mi45bDU5MiA0NjRjMTAuNCA4LjIgMjUuNSA2LjMgMzMuNy00LjFzNi4zLTI1LjUtNC4xLTMzLjdMNTI1LjYgMzg2LjdjMzkuNi00MC42IDY2LjQtODYuMSA3OS45LTExOC40YzMuMy03LjkgMy4zLTE2LjcgMC0yNC42Yy0xNC45LTM1LjctNDYuMi04Ny43LTkzLTEzMS4xQzQ2NS41IDY4LjggNDAwLjggMzIgMzIwIDMyYy02OC4yIDAtMTI1IDI2LjMtMTY5LjMgNjAuOEwzOC44IDUuMXpNMjIzLjEgMTQ5LjVDMjQ4LjYgMTI2LjIgMjgyLjcgMTEyIDMyMCAxMTJjNzkuNSAwIDE0NCA2NC41IDE0NCAxNDRjMCAyNC45LTYuMyA0OC4zLTE3LjQgNjguN0w0MDggMjk0LjVjNS4yLTExLjggOC0yNC44IDgtMzguNWMwLTUzLTQzLTk2LTk2LTk2Yy0yLjggMC01LjYgLjEtOC40IC40YzUuMyA5LjMgOC40IDIwLjEgOC40IDMxLjZjMCAxMC4yLTIuNCAxOS44LTYuNiAyOC4zbC05MC4zLTcwLjh6bTIyMy4xIDI5OEwzNzMgMzg5LjljLTE2LjQgNi41LTM0LjMgMTAuMS01MyAxMC4xYy03OS41IDAtMTQ0LTY0LjUtMTQ0LTE0NGMwLTYuOSAuNS0xMy42IDEuNC0yMC4yTDgzLjEgMTYxLjVDNjAuMyAxOTEuMiA0NCAyMjAuOCAzNC41IDI0My43Yy0zLjMgNy45LTMuMyAxNi43IDAgMjQuNmMxNC45IDM1LjcgNDYuMiA4Ny43IDkzIDEzMS4xQzE3NC41IDQ0My4yIDIzOS4yIDQ4MCAzMjAgNDgwYzQ3LjggMCA4OS45LTEyLjkgMTI2LjItMzIuNXoiLz48L3N2Zz4nLHMudHlwZT0idGV4dCIpOihjLmlubmVySFRNTD0nPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIj48cGF0aCBkPSJNMjg4IDMyYy04MC44IDAtMTQ1LjUgMzYuOC0xOTIuNiA4MC42QzQ4LjYgMTU2IDE3LjMgMjA4IDIuNSAyNDMuN2MtMy4zIDcuOS0zLjMgMTYuNyAwIDI0LjZDMTcuMyAzMDQgNDguNiAzNTYgOTUuNCAzOTkuNEMxNDIuNSA0NDMuMiAyMDcuMiA0ODAgMjg4IDQ4MHMxNDUuNS0zNi44IDE5Mi42LTgwLjZjNDYuOC00My41IDc4LjEtOTUuNCA5My0xMzEuMWMzLjMtNy45IDMuMy0xNi43IDAtMjQuNmMtMTQuOS0zNS43LTQ2LjItODcuNy05My0xMzEuMUM0MzMuNSA2OC44IDM2OC44IDMyIDI4OCAzMnpNNDMyIDI1NmMwIDc5LjUtNjQuNSAxNDQtMTQ0IDE0NHMtMTQ0LTY0LjUtMTQ0LTE0NHM2NC41LTE0NCAxNDQtMTQ0czE0NCA2NC41IDE0NCAxNDR6TTI4OCAxOTJjMCAzNS4zLTI4LjcgNjQtNjQgNjRjLTExLjUgMC0yMi4zLTMtMzEuNi04LjRjLS4yIDIuOC0uNCA1LjUtLjQgOC40YzAgNTMgNDMgOTYgOTYgOTZzOTYtNDMgOTYtOTZzLTQzLTk2LTk2LTk2Yy0yLjggMC01LjYgLjEtOC40IC40YzUuMyA5LjMgOC40IDIwLjEgOC40IDMxLjZ6Ii8+PC9zdmc+JyxzLnR5cGU9InBhc3N3b3JkIil9KSl9KSk7"></script>
+</body>
+</html>
