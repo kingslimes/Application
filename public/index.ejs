@@ -12,8 +12,12 @@
     <section>
         <div class="container">
             <div class="box">
-                <h1>Welcome</h1>
-                <p>Free manga upload!</p>
+                <h1>Web comics</h1>
+                <p>Upload your content for free. no space limitation</p>
+                <div class="btn">
+                    <button onclick="window.location.href=<%- flash.login ? flash.homePath : '/register' %>"><%- flash.login ? "Home" : "Register" %></button>
+                    <button onclick="window.location.href=<%- flash.login ? flash.dashboard : '/login' %>"><%- flash.login ? "Dashboard" : "Login" %></button>
+                </div>
             </div>
         </div>
     </section>
@@ -58,6 +62,22 @@ section {
 }
 .container p {
     font-size: 11pt;
+    max-width: 220px;
+}
+.btn button {
+  font-size: 1rem;
+  padding: .5rem .8rem;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 4px;
+  margin-right: 5px;
+  transition: background 300ms;
+  font-family: 'Poppins', sans-serif;
+}
+.btn button:hover {
+  background: white;
+  color: black;
 }
 </style>
 </body>
