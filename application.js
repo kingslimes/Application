@@ -14,6 +14,9 @@ const member = new slimeDB('member').createTable({
 
 // set home page
 client.get('/', ( req, res ) => {
+  req.flash('login', req.session.login);
+  req.flash('homePath', `/${req.session.username}/`);
+  req.flash('dashboard', req.session.dashboard);
   res.render('index');
 })
 
