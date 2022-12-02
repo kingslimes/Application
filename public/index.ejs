@@ -9,23 +9,55 @@
     <link rel="manifest" href="<%= locals.manifest %>">
 </head>
 <body>
-    <nav class="navbar">
-        <a class="brand" href="/">Kingslimes</a>
-    </nav>
-    <div class="container">
-
-    </div>
+    <section>
+        <div class="container">
+            <div class="box">
+                <h1>Welcome</h1>
+                <p>Free manga upload!</p>
+            </div>
+        </div>
+    </section>
+    
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300&family=Righteous&display=swap');
-.navbar {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+body {
+    position: absolute;
+    display: block;
+    height: 100%;
     width: 100%;
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
+    margin: 0;
+    left: 0;
+    top: 0
 }
-.brand {
+section {
+    background-image: url(/images/hero.webp);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.container {
+    color: white;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
     font-family: 'Poppins', sans-serif;
+    text-align: left;
+    flex-wrap: wrap;
+    max-width: 90vw;
+    margin: auto;
+    width: 100%;
+}
+.container h1 {
+    font-size: 2.5rem;
+    width: 100%;
+    margin: 0;
+}
+.container p {
+    font-size: 11pt;
 }
 </style>
 </body>
