@@ -9,44 +9,24 @@
     <link rel="manifest" href="<%= locals.manifest %>">
 </head>
 <body>
-    <div id="app">
-        <div class="content">
-            <h1>Let’s build from here</h1>
-        </div>
+    <nav class="navbar">
+        <a class="brand" href="/">Kingslimes</a>
+    </nav>
+    <div class="container">
+
     </div>
 <style>
-body {
-    margin: 0;
-}
-#app {
-    background-image: url(/images/hero.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    position: absolute;
-    height: 100%;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300&family=Righteous&display=swap');
+.navbar {
     width: 100%;
-    z-index: 1;
-    left: 0;
-    top: 0
-}
-#app:after {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.1));
-    position: absolute;
-    filter: blur(2px);
-    height: 100%;
-    width: 100%;
-    content: "";
-    z-index: 2;
-    left: 0;
-    top: 0
-}
-.content {
+    display: flex;
     position: relative;
-    color: aliceblue;
-    z-index: 3;
+    align-items: center;
+    justify-content: center;
 }
-
+.brand {
+    font-family: 'Poppins', sans-serif;
+}
 </style>
 </body>
 </html>
