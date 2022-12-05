@@ -1,6 +1,10 @@
 const { client } = require('./lib/router');
 const slimeDB = require('slimedb');
+const fs = require('fs');
 const md5 = require('md5');
+const short = require('shortid');
+const { google } = require('googleapis');
+const GOOGLE_API_FOLDER_ID = '1-sQEbClcbj6xmywa5XygM3wWfGCWWF69';
 
 const member = new slimeDB('member').createTable({
   id: slimeDB.DataType.PRIMARY,
@@ -12,12 +16,79 @@ const member = new slimeDB('member').createTable({
   created: slimeDB.DataType.DATETIME
 });
 
+client.post('/api/v1/files/create', async ( req, res ) => {
+  const pathName = './stream/' + short.generate() + '.stream';
+  fs.writeFileSync(pathName, req.body.image, { encoding:'base64' });
+  try {
+    const auth = new google.auth.GoogleAuth({
+      keyFile: './google.json',
+      scopes: ['https://www.googleapis.com/auth/drive']
+    })
+    const driveService = google.drive({
+      version: 'v3',
+      auth
+    })
+    const fileMetaData = {
+      'name': `${ new Date().getTime() }`,
+      'parents': [GOOGLE_API_FOLDER_ID]
+    }
+    const media = {
+      mimeType: req.body.mimeType,
+      body: fs.createReadStream(pathName)
+    }
+    const response = await driveService.files.create({
+      resource: fileMetaData,
+      media: media,
+      field: 'id'
+    })
+    res.json({
+      id: response.data.id,
+      name: req.body.name
+    })
+  } catch(err) {
+    res.status(403).json({
+        message: err
+    })
+  }
+  fs.unlinkSync(pathName);
+});
+
+client.post('/api/v1/files/delete', async ( req, res ) => {
+  try {
+    const auth = new google.auth.GoogleAuth({
+      keyFile: './google.json',
+      scopes: ['https://www.googleapis.com/auth/drive']
+    })
+    const driveService = google.drive({
+      version: 'v3',
+      auth
+    })
+    const response = await driveService.files.delete({
+      fileId: req.body.id
+    })
+    res.json({
+      id: req.body.id,
+    })
+  } catch(err) {
+    res.status(403).json({
+      message: err
+    })
+  }
+});
+
 // set home page
 client.get('/', ( req, res ) => {
   req.flash('login', req.session.login);
+  req.flash('username', req.session.username);
   req.flash('homePath', `/${req.session.username}/`);
   req.flash('dashboard', req.session.dashboard);
   res.render('index');
+})
+
+// set upload page
+client.get('/:username/dashboard/upload/:id', ( req, res ) => {
+  //if ( !req.session.login || req.session.username != req.params.username ) return res.redirect( `/${req.params.username}/` );
+  res.render('upload');
 })
 
 // set register page

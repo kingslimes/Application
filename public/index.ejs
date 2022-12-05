@@ -12,11 +12,15 @@
     <section>
         <div class="container">
             <div class="box">
-                <h1>Web comics</h1>
-                <p>Upload your content for free. no space limitation</p>
+                <h1>Kingslimes</h1>
+                <% if ( flash.login ) { %>
+                    <p>Upload your content for free. no disk space limit. <br>Welcome <%= flash.username %></p>
+                <% } else { %>
+                    <p>Upload your content for free. no disk space limit. <br>Get started now</p>
+                <% } %>
                 <div class="btn">
-                    <button onclick="window.location.href=<%- flash.login ? flash.homePath : '/register' %>"><%- flash.login ? "Home" : "Register" %></button>
-                    <button onclick="window.location.href=<%- flash.login ? flash.dashboard : '/login' %>"><%- flash.login ? "Dashboard" : "Login" %></button>
+                    <button onclick="window.location.href=`<%- flash.login ? flash.homePath : '/register' %>`;"><%- flash.login ? "Home" : "Register" %></button>
+                    <button onclick="window.location.href=`<%- flash.login ? flash.dashboard : '/login' %>`;"><%- flash.login ? "Dashboard" : "Login" %></button>
                 </div>
             </div>
         </div>
@@ -34,6 +38,7 @@ body {
     top: 0
 }
 section {
+    background: #000;
     background-image: url(/images/hero.webp);
     background-repeat: no-repeat;
     background-position: center;
@@ -61,22 +66,24 @@ section {
 }
 .container p {
     font-size: 11pt;
-    max-width: 220px;
+    width: 500px;
+    max-width: 60vw;
 }
 .btn button {
-  font-size: 1rem;
-  padding: .5rem .8rem;
-  border: none;
-  background: black;
-  color: white;
-  border-radius: 4px;
-  margin-right: 5px;
-  transition: background 300ms;
-  font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: .5rem .8rem;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 4px;
+    margin-right: 5px;
+    transition: background 300ms;
+    font-family: 'Poppins', sans-serif;
 }
 .btn button:hover {
-  background: white;
-  color: black;
+    background: white;
+    color: black;
 }
 </style>
 </body>

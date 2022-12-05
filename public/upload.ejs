@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://cloud-stack-pro.github.io">
+    <link rel="stylesheet" href="https://cloud-stack-pro.github.io/fontawesome/pro.min.css" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js" integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Upload</title>
+    <link rel="shortcut icon" href="<%= locals.favicon %>" type="image/x-icon">
+    <link rel="manifest" href="<%= locals.manifest %>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamber">
+            <i style="color: aliceblue" class="fa-solid fa-bars"></i>
+        </div>
+        <div class="box-left">
+            <a class="brand" href="../../../">Kingslimes</a>
+            <a href="../../">Home</a>
+            <a href="../">Dashboard</a>
+        </div>
+        <div class="box-right">
+            <button onclick="window.location.href='/logout';">logout</button>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="drop-box">
+            <i class="fa-light fa-file"></i>
+            <h2>Drag files here to add them to your picture</h2>
+            <input class="xfile hidden" type="file" id="files" oninput="uploadFiles(this.files)" multiple>
+            <span>Or <label for="files">choose your files</label></span>
+        </div>
+        <div class="process">
+            <progress type="range" class="progress" value="0" max="100"></progress>
+        </div>
+        <div class="sorted hidden">
+            <p>sorting</p>
+            <select class="sort" title="select">
+                <option value="null" selected>none</option>
+                <option value="[0-9]">0-9</option>
+                <option value="[a-z]">a-z</option>
+            </select>
+        </div>
+        <div class="list hidden">
+            
+        </div>
+        <button class="success hidden" type="reset">
+            Save
+        </button>
+    </div>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
+body { margin:0 }
+body * { font-family: 'Poppins', sans-serif }
+.container {
+    width: 100%;
+    margin: auto;
+    max-width: 960px;
+    box-sizing: border-box;
+}
+.hamber {
+    display: none;
+    position: absolute;
+    left: -100vw;
+}
+.navbar {
+    width: 100%;
+    background: black;
+    padding: .6rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+.navbar div {
+    display: flex;
+    align-items: center;
+    transition: all 250ms;
+}
+.navbar .brand {
+    margin-right: 1rem;
+    margin-left: 2rem;
+    font-size: 1.2rem;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+    margin: 0 .2rem;
+    font-size: .9rem;
+    transition: all 250ms;
+}
+.navbar a:hover {
+    transform: scale(1.1);
+}
+.navbar button {
+    border: 1.4px solid black;
+    margin-right: 2rem;
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 300ms;
+}
+.navbar button:hover {
+    color: white;
+    font-weight: bold;
+    transform: scale(1.1);
+    border: 1.4px solid white;
+    background: rgba(0, 0, 0, 0.884);
+}
+.drop-box {
+    width: 100%;
+    position: relative;
+    padding: 5rem 0;
+    user-select: none;
+    -webkit-user-drag: none;
+    text-align: center;
+    border-radius: 5px;
+    background: white;
+    border: 1px solid rgba(37, 37, 37, 0.219);
+}
+.drop-box.active {
+    filter: blur(3px);
+    border: 1px solid red;
+    z-index: 5;
+}
+.drop-box.active * {
+    z-index: 1;
+}
+.drop-box i {
+    font-size: 2.4rem;
+}
+.drop-box h2 {
+    margin-bottom: 2px;
+    display: block;
+}
+.drop-box label {
+    color: rgb(0, 119, 255);
+    cursor: pointer;
+}
+.drop-box label:hover {
+    text-decoration-line: underline;
+}
+
+.process {
+    padding: 1rem 0;
+    width: 100%;
+    position: relative;
+}
+.process progress {
+    width: 100%;
+    height: 1.5rem;
+    appearance: none;
+    visibility: hidden;
+    -webkit-appearance: none;
+}
+.process progress::-webkit-progress-bar {
+    background: #eee;
+    border-radius: 5px;
+}
+.process progress::-webkit-progress-value {
+    background: rgb(21, 145, 27);
+    border-radius: 5px;
+}
+.process progress.show {
+    visibility: visible
+}
+
+.sorted {
+    width: 100%;
+    margin: 5px 0;
+    display: flex;
+    justify-content: right;
+}
+.sorted p {
+    margin: 2px 6px;
+}
+
+.list {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    border: 1px solid rgba(37, 37, 37, 0.219);
+}
+.list div {
+    width: auto;
+    display: flex;
+    align-items: center;
+    padding: .1rem 1.2rem;
+    box-sizing: border-box;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(37, 37, 37, 0.219);
+}
+.list i {
+    font-size: 1rem;
+    padding-right: 5px;
+}
+.list p {
+    margin: 8px 0;
+}
+.list button {
+    padding: 2px 4px 0 4px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+.list i:hover {
+    color: rgb(0, 82, 204);
+}
+
+.success {
+    margin: 3rem auto;
+    padding: .4rem .8rem;
+    border: 0;
+    font-size: 1rem;
+    background: #2da44e;
+    color: white;
+    display: block;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+@media only screen and ( max-width:970px ) {
+    .container {
+        padding: 1rem;
+    }
+}
+@media only screen and ( max-width:570px ) {
+    .container {
+        padding: 0 1rem;
+    }
+    .hamber {
+        position: relative;
+        margin-left: 1rem;
+        display: none;
+        padding: 5px;
+        left: 0;
+    }
+    .hamber i {
+        color: white;
+        font-size: 1.4rem;
+    }
+    .box-left {
+        padding: .4rem;
+        position: absolute;
+        left: -20rem;
+        top: 4.5rem;
+        background: white;
+        z-index: 10;
+        flex-wrap: wrap;
+        width: 250px;
+        border-radius: 5px;
+        border: 1px solid rgba(37, 37, 37, 0.219);
+        box-shadow: 0px 8px 8px 2px rgba(0, 0, 0, 0.1);
+    }
+    .box-left a:hover {
+        transform: scale(1) translateX(6px);
+    }
+    .box-left a, .navbar .brand {
+        color: black;
+        width: 100%;
+        padding: 5px 10px;
+        margin: 0;
+        font-size: 1rem;
+    }
+    .box-left::before {
+        width: 0; 
+        height: 0; 
+        content: '';
+        margin-top: calc(-14px - .4rem);
+        margin-left: 15px;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid black;
+    }
+}
+.hidden {
+    visibility: hidden;
+    position: absolute;
+    left: -100vw;
+}
+.loading {
+    background: #eee;
+    height: 2rem;
+    width: 100%;
+}
+.xfile.hidden {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+<script>
+
+function Base64( file ) {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            let encoded = fileReader.result.toString().replace(/^data:(.*,)?/, '');
+            if ((encoded.length % 4) > 0) {
+                encoded += '='.repeat(4 - (encoded.length % 4));
+            }
+            resolve(encoded);
+        };
+        fileReader.onerror = (error) => {
+            reject(error);
+        };
+    });
+};
+
+let dropBox = document.querySelector(".drop-box");
+let progress = document.querySelector(".progress");
+let sorted = document.querySelector(".sorted");
+let sort = document.querySelector(".sort");
+let elmList = document.querySelector(".list");
+let success = document.querySelector(".success");
+let hamber = document.querySelector(".hamber");
+let ham = false;
+
+success.addEventListener('click', function() {
+    var table = list;
+    if ( sort.value != "null" ) {
+        sort.value == "[a-z]" && ( table = list.sort((a,b) => a.name.localeCompare(b.firstname)) )
+        sort.value == "[0-9]" && ( table = list.sort((a,b) => Number(a.name.match(/\d/g)?.join('') || 0) > Number(b.name.match(/\d/g)?.join('') || 0) ? 1 : -1) )
+    }
+});
+
+
+
+hamber.addEventListener('click', function() {
+    let bl = document.querySelector(".box-left");
+    if ( !ham ) {
+        bl.style.left = ".5rem"
+        ham = true
+    } else {
+        bl.style.left = "-20rem"
+        ham = false
+    }
+});
+
+let list = new Array();
+dropBox.addEventListener('drop', function(e) {
+    let files = e.dataTransfer.files;
+    dropBox.classList.remove('active');
+    uploadFiles( files )
+});
+dropBox.addEventListener('dragover', function(e) {
+    dropBox.classList.add('active');
+});
+dropBox.addEventListener('dragleave', function(e) {
+    dropBox.classList.remove('active');
+});
+
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach( eventName => {
+    dropBox.addEventListener(eventName, function(e) {
+        e.preventDefault()
+        e.stopPropagation()
+    }, false);
+});
+
+async function uploadFiles( files ) {
+    let len = 100 / files.length;
+    success.classList.remove('hidden');
+    sorted.classList.remove('hidden');
+    progress.classList.add('show');
+    for ( let file of files ) {
+        const data = await Base64( file );
+        await axios.post('/api/v1/files/create', {
+            image: data,
+            mimeType: file.type,
+            name: file.name
+        }).then( e => handleSuccess(e.data, len) )
+    };
+    progress.value = "0";
+    progress.classList.remove('show');
+};
+
+function handleSuccess( data, m ) {
+    progress.value += m;
+    list.push(data);
+    createList(data);
+};
+
+function createList( obj ) {
+    elmList.classList.remove('hidden')
+    elmList.innerHTML += `<div data-id="${obj.id}" data-name="${obj.name}"><p><i class="fa-light fa-file"></i> ${obj.name}</p><button data-id="${obj.id}" role="button" onclick="removeById(this)"><i class="fa-solid fa-xmark"></i></button></div>`;
+};
+
+async function removeById( self ) {
+    const result = list.find( i => i.id == self.dataset.id );
+    if ( !result ) return false;
+    list.splice(list.indexOf(result), 1)
+    await axios.post('/api/v1/files/delete', { id:self.dataset.id }).then(e => console.log(`Deleted file id ${e.data.id}`))
+    self.parentNode.remove()
+    if ( list.length == 0 ) {
+        elmList.classList.add('hidden');
+        success.classList.add('hidden');
+        sorted.classList.add('hidden');
+    }
+};
+
+</script>
+</body>
+</html>
