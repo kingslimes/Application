@@ -8,16 +8,16 @@ const GOOGLE_API_FOLDER_ID = '1-sQEbClcbj6xmywa5XygM3wWfGCWWF69';
 
 const member = new slimeDB('member').createTable({
   id: slimeDB.DataType.PRIMARY,
-  root: slimeDB.DataType.VARCHAR,
-  email: slimeDB.DataType.VARCHAR,
-  username: slimeDB.DataType.VARCHAR,
-  password: slimeDB.DataType.VARCHAR,
+  root: slimeDB.DataType.STRING,
+  email: slimeDB.DataType.STRING,
+  username: slimeDB.DataType.STRING,
+  password: slimeDB.DataType.STRING,
   timestamp: slimeDB.DataType.NUMBER,
   created: slimeDB.DataType.DATETIME
 });
 const chapter = new slimeDB('chapter').createTable({
   id: slimeDB.DataType.PRIMARY,
-  manga_id: slimeDB.DataType.VARCHAR,
+  manga_id: slimeDB.DataType.STRING,
   images: slimeDB.DataType.VARCHAR
 })
 
