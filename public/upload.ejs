@@ -357,7 +357,7 @@ success.addEventListener('click', async function() {
         newArr.push(obj.id)
     }
     sc.classList.remove('hide');
-    await axios.post(window.location.href, newArr).then(e => { sc.classList.add('hide');window.location.href = "../"; });
+    await axios.post(window.location.href, {images:newArr}).then(e => { sc.classList.add('hide');window.location.href = "../"; });
 });
 
 function sortList( self ) {
