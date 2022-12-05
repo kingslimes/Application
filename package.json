@@ -1,6 +1,6 @@
 {
   "name": "application",
-  "version": "1.1.0",
+  "version": "1.1.8",
   "description": "Application manga reader",
   "main": "application.js",
   "scripts": {
@@ -29,6 +29,6 @@
     "md5": "^2.3.0",
     "nodemon": "^2.0.20",
     "shortid": "^2.2.16",
-    "slimedb": "^3.0.0"
+    "slimedb": "^3.2.1"
   }
 }
