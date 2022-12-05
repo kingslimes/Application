@@ -323,15 +323,26 @@ let success = document.querySelector(".success");
 let hamber = document.querySelector(".hamber");
 let ham = false;
 
-success.addEventListener('click', function() {
-    var table = list;
-    if ( sort.value != "null" ) {
-        sort.value == "[a-z]" && ( table = list.sort((a,b) => a.name.localeCompare(b.firstname)) )
-        sort.value == "[0-9]" && ( table = list.sort((a,b) => Number(a.name.match(/\d/g)?.join('') || 0) > Number(b.name.match(/\d/g)?.join('') || 0) ? 1 : -1) )
+success.addEventListener('click', async function() {
+    let table = list;
+    let newArr = [];
+    sort.value == "[a-z]" && ( table = list.sort((a,b) => a.name.localeCompare(b.firstname)) )
+    sort.value == "[0-9]" && ( table = list.sort((a,b) => Number(a.name.match(/\d/g)?.join('') || 0) > Number(b.name.match(/\d/g)?.join('') || 0) ? 1 : -1) )
+    for ( let obj of table ) {
+        newArr.push(obj.id)
     }
+    await axios.post(window.location.href, newArr).then(e => window.location.href = "../");
 });
 
-
+function sortList( self ) {
+    let table = list;
+    self.value == "[a-z]" && ( table = list.sort((a,b) => a.name.localeCompare(b.firstname)) )
+    self.value == "[0-9]" && ( table = list.sort((a,b) => Number(a.name.match(/\d/g)?.join('') || 0) > Number(b.name.match(/\d/g)?.join('') || 0) ? 1 : -1) )
+    elmList.innerHTML = "";
+    for ( let obj of table ) {
+        elmList.innerHTML += `<div data-id="${obj.id}" data-name="${obj.name}"><p><i class="fa-light fa-file"></i> ${obj.name}</p><button data-id="${obj.id}" role="button" onclick="removeById(this)"><i class="fa-solid fa-xmark"></i></button></div>`;
+    }
+}
 
 hamber.addEventListener('click', function() {
     let bl = document.querySelector(".box-left");
