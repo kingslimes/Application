@@ -49,6 +49,7 @@
             Save
         </button>
     </div>
+    <div class="screen hide"><i class="fa-solid fa-flip fa-snowflake fa-4x" style="--fa-animation-duration:1909ms;"></i></div>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
 body { margin:0 }
@@ -58,6 +59,24 @@ body * { font-family: 'Poppins', sans-serif }
     margin: auto;
     max-width: 960px;
     box-sizing: border-box;
+}
+.screen {
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  z-index: 15;
+  left: 0;
+  top: 0
+}
+.screen.hide {
+  display: none
+}
+.screen i {
+  color: snow
 }
 .hamber {
     display: none;
@@ -321,6 +340,7 @@ let sort = document.querySelector(".sort");
 let elmList = document.querySelector(".list");
 let success = document.querySelector(".success");
 let hamber = document.querySelector(".hamber");
+let sc = document.querySelector(".screen");
 let ham = false;
 
 success.addEventListener('click', async function() {
@@ -331,7 +351,8 @@ success.addEventListener('click', async function() {
     for ( let obj of table ) {
         newArr.push(obj.id)
     }
-    await axios.post(window.location.href, newArr).then(e => window.location.href = "../");
+    sc.classList.remove('hide');
+    await axios.post(window.location.href, newArr).then(e => { sc.classList.add('hide');window.location.href = "../"; });
 });
 
 function sortList( self ) {
