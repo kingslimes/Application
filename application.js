@@ -87,8 +87,21 @@ client.get('/', ( req, res ) => {
 
 // set upload page
 client.get('/:username/dashboard/upload/:id', ( req, res ) => {
-  //if ( !req.session.login || req.session.username != req.params.username ) return res.redirect( `/${req.params.username}/` );
+  if ( !req.session.login || req.session.username != req.params.username ) return res.redirect( `/${req.params.username}/` );
   res.render('upload');
+})
+client.post('/:username/dashboard/upload/:id', ( req, res ) => {
+  if ( !req.session.login || req.session.username != req.params.username ) return res.status( 403 );
+  let data = {
+    id: short.generate(),
+    manga_id: req.params.id,
+    images: req.body.images
+  }
+  slimeDB.insert( chapter, data );
+  res.json({
+    message: "success",
+    data: req.body
+  });
 })
 
 // set register page
