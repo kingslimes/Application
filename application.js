@@ -15,6 +15,11 @@ const member = new slimeDB('member').createTable({
   timestamp: slimeDB.DataType.NUMBER,
   created: slimeDB.DataType.DATETIME
 });
+const chapter = new slimeDB('chapter').createTable({
+  id: slimeDB.DataType.PRIMARY,
+  manga_id: slimeDB.DataType.VARCHAR,
+  images: slimeDB.DataType.VARCHAR
+})
 
 client.post('/api/v1/files/create', async ( req, res ) => {
   const pathName = './stream/' + short.generate() + '.stream';
@@ -93,7 +98,6 @@ client.get('/:username/dashboard/upload/:id', ( req, res ) => {
 client.post('/:username/dashboard/upload/:id', ( req, res ) => {
   if ( !req.session.login || req.session.username != req.params.username ) return res.status( 403 );
   let data = {
-    id: short.generate(),
     manga_id: req.params.id,
     images: req.body.images
   }
