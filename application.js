@@ -22,6 +22,7 @@ const chapter = new slimeDB('chapter').createTable({
 })
 
 client.post('/api/v1/files/create', async ( req, res ) => {
+  if ( !req.session.login ) return res.status( 403 );
   const pathName = './stream/' + short.generate() + '.stream';
   fs.writeFileSync(pathName, req.body.image, { encoding:'base64' });
   try {
@@ -59,6 +60,7 @@ client.post('/api/v1/files/create', async ( req, res ) => {
 });
 
 client.post('/api/v1/files/delete', async ( req, res ) => {
+  if ( !req.session.login ) return res.status( 403 );
   try {
     const auth = new google.auth.GoogleAuth({
       keyFile: './google.json',
